@@ -9,8 +9,9 @@ class BmiModel {
     public function saveBmiRecord($user_id, $name, $weight, $height, $bmi, $status) {
         $stmt = $this->db->prepare("INSERT INTO bmi_records (user_id, name, weight, height, bmi, status) VALUES (?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("isfffs", $user_id, $name, $weight, $height, $bmi, $status);
-        $stmt->execute();
+        $success = $stmt->execute();
         $stmt->close();
+        return $success;
     }
 
     public function getBmiHistory($user_id) {
