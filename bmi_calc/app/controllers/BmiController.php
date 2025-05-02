@@ -10,21 +10,24 @@ class BmiController {
         if (empty($name) || !is_numeric($weight) || !is_numeric($height) || $weight <= 0 || $height <= 0) {
             return [
                 'success' => false,
-                'message' => 'Invalid input values. Please enter valid data.'
+                'message' => 'Invalid input values. Please enter valid data.',
+                'history' => $this->model->getBmiHistory($user_id)
             ];
         }
 
         if ($weight > 500) {
             return [
                 'success' => false,
-                'message' => 'Weight must be less than 500 kg.'
+                'message' => 'Weight must be less than 500 kg.',
+                'history' => $this->model->getBmiHistory($user_id)
             ];
         }
 
         if ($height > 3) {
             return [
                 'success' => false,
-                'message' => 'Height must be less than 3 meters.'
+                'message' => 'Height must be less than 3 meters.',
+                'history' => $this->model->getBmiHistory($user_id)
             ];
         }
 
