@@ -14,13 +14,7 @@ $user = $result->fetch_assoc();
 $role = $user['role'];
 $stmt->close();
 
-require_once '../models/BmiModel.php';
-require_once '../controllers/BmiController.php';
-
-$model = new BmiModel($conn);
-$controller = new BmiController($model);
-
-$result = ['success' => false, 'message' => 'No data submitted.', 'history' => $model->getBmiHistory($_SESSION['user_id'])];
+$result = ['success' => false, 'message' => 'No data submitted.', 'history' => []]; 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['name'], $_POST['weight'], $_POST['height'])) {
     $name = htmlspecialchars($_POST['name']);
     $weight = floatval($_POST['weight']);
@@ -140,7 +134,7 @@ foreach ($result['history'] as $entry) {
             <canvas id="bmiChart" width="400" height="200"></canvas>
         </div>
         
-        <a href="bmi_form.php" class="btn btn-secondary mt-3">Back to Form</a>
+<a href="../public/index.php" class="btn btn-secondary mt-3">Back to Form</a>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
